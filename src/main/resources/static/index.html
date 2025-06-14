@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO App</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>📝 My TODO List</h1>
+
+    <form id="taskForm">
+      <div class="form-group">
+        <input type="text" id="title" placeholder="Task Title" required />
+        <input type="text" id="description" placeholder="Description" />
+        <input type="date" id="dueDate" required />
+        <button type="submit">➕ Add Task</button>
+      </div>
+    </form>
+
+    <ul id="taskList"></ul>
+  </div>
+
+  <!-- Template for task item -->
+  <template id="taskItemTemplate">
+    <li class="task-item">
+      <div class="task-text">
+        <strong class="task-title"></strong>
+        <small class="task-desc"></small>
+        <small class="task-date"></small>
+      </div>
+      <div class="task-actions">
+        <button class="complete-btn">✅ Complete</button>
+        <button class="delete-btn">❌ Delete</button>
+      </div>
+    </li>
+  </template>
+
+  <script src="app.js"></script>
+</body>
+</html>
