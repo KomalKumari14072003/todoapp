@@ -2,7 +2,9 @@ package com.todo.todoapp.contoller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,10 +36,18 @@ public class TaskController {
     }
 
     // ✅ POST: Create a new task
-    @PostMapping("/save/task")
-    public Task createTask(@RequestBody Task task) {
-        return taskRepository.save(task);
+   @PostMapping("/save/task")
+    public ResponseEntity<?> createTask(@RequestBody Task task) {
+    if (task.getTitle() == null || task.getTitle().trim().isEmpty()) {
+        return ResponseEntity.badRequest().body("Title cannot be null or empty");
     }
+    if (task.getDescription() == null || task.getDescription().trim().isEmpty()) {
+        return ResponseEntity.badRequest().body("Description cannot be null or empty");
+    }
+    Task savedTask = taskRepository.save(task);
+    return ResponseEntity.ok(savedTask);
+}
+
 
     // ✅ PUT: Update (or mark as completed)
     @PutMapping("/update/task/{id}")
